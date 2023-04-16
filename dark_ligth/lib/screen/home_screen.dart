@@ -3,7 +3,7 @@ import 'package:dark_ligth/constant/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-
+import 'package:floating_bubbles/floating_bubbles.dart';
 import 'component/wire_draw.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -52,6 +52,21 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Stack(
           fit: StackFit.expand,
           children: [
+            FloatingBubbles(
+              noOfBubbles: 25,
+              colorsOfBubbles: [
+                Colors.green.withAlpha(30),
+                Colors.red,
+              ],
+              sizeFactor: 0.16,
+              duration: 1200, // 120 seconds.
+              opacity: 70,
+              paintingStyle: PaintingStyle.stroke,
+              strokeWidth: 8,
+              shape: BubbleShape
+                  .circle, // circle is the default. No need to explicitly mention if its a circle.
+              speed: BubbleSpeed.normal, // normal is the default
+            ),
             leftPart(context, size, themeProvider),
             Positioned(
               top: containerPosition.dy - size.width * .1 / 2 - 5,
@@ -70,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
               toOffset: switchPosition,
             ),
             AnimatedPositioned(
-              duration: const Duration(milliseconds: 0),
+              duration: const Duration(milliseconds: 1),
               top: switchPosition.dy - size.width * 0.1 / 2,
               left: switchPosition.dx - size.width * 0.1 / 2,
               child: Draggable(
@@ -128,32 +143,25 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              DateFormat('j').format(DateTime.now()),
+              DateFormat('jm').format(DateTime.now()),
               style: Theme.of(context).textTheme.headline1,
             ),
             SizedBox(
-              width: size.width * .2,
+              width: size.width * .7,
               child: const Divider(
-                height: 0,
+                //height: 0,
                 thickness: 1,
                 color: AppColors.white,
               ),
             ),
-            Text(
-              DateFormat('m').format(DateTime.now()),
-              style: Theme.of(context)
-                  .textTheme
-                  .headline1!
-                  .copyWith(color: AppColors.white),
-            ),
-            const Spacer(),
             const Text(
-              "Light Dark\nPersonal\nSwitch",
+              "Ronny Bonilla Arias",
               style: TextStyle(
-                fontSize: 40,
+                fontSize: 25,
                 fontWeight: FontWeight.bold,
               ),
             ),
+            const Spacer(),
             const Spacer(),
             Container(
               width: size.width * .2,
@@ -180,9 +188,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 style: Theme.of(context).textTheme.headline2!.copyWith(
                       color: AppColors.white,
                     )),
-            Text(
-              "Clear",
-              style: Theme.of(context).textTheme.headline6,
+            const Text(
+              "Universidad Nacional",
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             Text(
               DateFormat('EEEE').format(DateTime.now()),
@@ -190,6 +201,10 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             Text(
               DateFormat('MMM ').format(DateTime.now()),
+              style: Theme.of(context).textTheme.headline6,
+            ),
+            Text(
+              DateFormat('d ').format(DateTime.now()),
               style: Theme.of(context).textTheme.headline6,
             ),
           ],
